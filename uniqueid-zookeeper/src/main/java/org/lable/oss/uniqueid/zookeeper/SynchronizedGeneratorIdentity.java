@@ -142,9 +142,13 @@ public class SynchronizedGeneratorIdentity implements GeneratorIdentityHolder {
     }
 
     static Long getDurationInMillis(Supplier<Duration> durationSupplier) {
-        if (durationSupplier == null) return null;
+        if (durationSupplier == null) {
+            return null;
+        }
         Duration duration = durationSupplier.get();
-        if (duration == null) return null;
+        if (duration == null) {
+            return null;
+        }
         return duration.toMillis();
     }
 }
