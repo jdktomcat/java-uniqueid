@@ -17,7 +17,24 @@ package org.lable.oss.uniqueid;
 
 import java.io.Closeable;
 
+/**
+ * ID生成器
+ *
+ * @author Administrator
+ */
 public interface GeneratorIdentityHolder extends Closeable {
+    /**
+     * 集群分布式ID产生器
+     * @return id
+     * @throws GeneratorException
+     */
     int getClusterId() throws GeneratorException;
+
+    /**
+     * 通常ID产生器
+     *
+     * @return id
+     * @throws GeneratorException
+     */
     int getGeneratorId() throws GeneratorException;
 }
