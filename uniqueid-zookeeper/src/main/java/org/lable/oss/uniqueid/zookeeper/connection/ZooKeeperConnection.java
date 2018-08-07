@@ -87,14 +87,11 @@ public class ZooKeeperConnection {
     }
 
     private void attemptConnection(int tries, int triesRemaining) throws IOException {
-        if (triesRemaining <= 0) throw new IOException(
-                String.format("Failed to (re)connect to ZooKeeper quorum after %d tries.", tries)
-        );
-
+        if (triesRemaining <= 0){
+            throw new IOException(String.format("Failed to (re)connect to ZooKeeper quorum after %d tries.", tries));
+        }
         logger.info("Attempting to (re)connect to ZooKeeper quorum ({} tries remaining).", triesRemaining);
-
         triesRemaining--;
-
         zookeeper = connect(quorumAddresses);
         if (!isConnected(zookeeper)) {
             attemptConnection(triesRemaining);
@@ -102,7 +99,9 @@ public class ZooKeeperConnection {
     }
 
     static boolean isConnected(ZooKeeper zookeeper) {
-        if (zookeeper == null) return false;
+        if (zookeeper == null) {
+            return false;
+        }
 
         // If the connection to the ZooKeeper is in a reconnecting state, wait at most 5 × 5 seconds for it to
         // resolve the connection on its own. After that, consider the connection broken.
@@ -134,7 +133,9 @@ public class ZooKeeperConnection {
     }
 
     public void shutdown() {
-        if (zookeeper == null) return;
+        if (zookeeper == null) {
+            return;
+        }
 
         try {
             zookeeper.close();
